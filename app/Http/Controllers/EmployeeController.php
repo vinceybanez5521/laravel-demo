@@ -40,6 +40,7 @@ class EmployeeController extends Controller
     {
         $data = Employee::where('id', $id)->first();
         $data = Employee::findOrFail($id);
+        // $data->full_name = "John";
         // dd($data);
         return view("employee.show", ['employee' => $data]);
     }

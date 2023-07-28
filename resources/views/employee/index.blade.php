@@ -22,7 +22,8 @@
             <tbody>
                 @foreach ($employees as $employee)
                 <tr>
-                    <td>{{ $employee->first_name . " " . $employee->last_name }}</td>
+                    {{-- <td>{{ $employee->first_name . " " . $employee->last_name }}</td> --}}
+                    <td>{{ $employee->full_name }}</td>
                     <td>{{ $employee->gender }}</td>
                     <td>{{ $employee->email }}</td>
                     <td>

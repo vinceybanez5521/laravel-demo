@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,4 +29,17 @@ class Employee extends Model
 
     // These are fields that should be hidden from APIs
     protected $hidden = ['created_at', 'updated'];
+
+    // Custom Attribute
+    public function fullName(): Attribute {
+        return new Attribute(
+            get: fn() => $this->first_name . " " . $this->last_name,
+            /* set: function($value) {
+                return [
+                    'first_name' => $value,
+                    'last_name' => $value,
+                ];
+            } */
+        );
+    }
 }

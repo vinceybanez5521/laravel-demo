@@ -16,8 +16,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    <link rel="stylesheet" href="resources/css/app.css">
+    {{-- Custom CSS and JS --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
