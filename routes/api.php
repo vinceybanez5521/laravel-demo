@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeApiController;
+use App\Http\Controllers\LoginApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/employees', [EmployeeApiController::class, 'index']);
-Route::get('/employees/show/{id}', [EmployeeApiController::class, 'show']);
-Route::post('/employees/create', [EmployeeApiController::class, 'store']);
-Route::put('/employees/update/{id}', [EmployeeApiController::class, 'update']);
-Route::delete('/employees/delete/{id}', [EmployeeApiController::class, 'destroy']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/employees', [EmployeeApiController::class, 'index']);
+    Route::get('/employees/show/{id}', [EmployeeApiController::class, 'show']);
+    Route::post('/employees/create', [EmployeeApiController::class, 'store']);
+    Route::put('/employees/update/{id}', [EmployeeApiController::class, 'update']);
+    Route::delete('/employees/delete/{id}', [EmployeeApiController::class, 'destroy']);
+    Route::post('/logout', [LoginApiController::class, 'logout']);
+});
+
+Route::post('/login', [LoginApiController::class, 'login']);
