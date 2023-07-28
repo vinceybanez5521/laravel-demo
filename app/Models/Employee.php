@@ -30,6 +30,9 @@ class Employee extends Model
     // These are fields that should be hidden from APIs
     protected $hidden = ['created_at', 'updated'];
 
+    // All custom attributes should be added here so that they show in APIs
+    protected $appends = ['full_name'];
+
     // Custom Attribute
     public function fullName(): Attribute {
         return new Attribute(
