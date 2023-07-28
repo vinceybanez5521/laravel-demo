@@ -28,6 +28,7 @@ class EmployeeApiController extends Controller
     }
 
     public function destroy($id) {
-        return Employee::destroy($id);
+        Employee::destroy($id);
+        return response("Successfully Deleted!", 200);
     }
 }
