@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
+use App\Repositories\EmployeeRepositoryInterface;
 
-class EmployeeRepository
+// class EmployeeMySqlRepository
+class EmployeeMySqlRepository implements EmployeeRepositoryInterface
 {
 
     public function all()

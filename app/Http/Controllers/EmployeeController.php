@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Repositories\EmployeeRepository;
+use App\Repositories\EmployeeMySqlRepository;
+use App\Repositories\EmployeeRepositoryInterface as RepositoriesEmployeeRepositoryInterface;
+use App\Repositories\EmployeeRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,12 +17,14 @@ class EmployeeController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     } */
 
-    private $employeeRepository;
+    // private $employeeMySqlRepository;
+    private $employeeRepositoryInterface;
 
-    public function __construct(EmployeeRepository $employeeRepository)
+    // public function __construct(EmployeeMySqlRepository $employeeMySqlRepository)
+    public function __construct(EmployeeRepositoryInterface $employeeRepositoryInterface)
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
-        $this->employeeRepository = $employeeRepository;
+        $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
     public function index()
@@ -45,7 +49,7 @@ class EmployeeController extends Controller
         // dd($data);
         */
 
-        $data = $this->employeeRepository->all();
+        $data = $this->employeeRepositoryInterface->all();
         return view("employee.index", ['employees' => $data]);
     }
 
@@ -57,7 +61,7 @@ class EmployeeController extends Controller
         // $data->full_name = "John";
         // dd($data);
         */
-        $data = $this->employeeRepository->findById($id);
+        $data = $this->employeeRepositoryInterface->findById($id);
         return view("employee.show", ['employee' => $data]);
     }
 
@@ -79,14 +83,14 @@ class EmployeeController extends Controller
 
     public function store()
     {
-        $this->employeeRepository->store();
+        $this->employeeRepositoryInterface->store();
         return redirect()->route('employee.index');
     }
 
     public function edit($id)
     {
         // $data = Employee::findOrFail($id);
-        $data = $this->employeeRepository->findById($id);
+        $data = $this->employeeRepositoryInterface->findById($id);
         return view('employee.edit', ['employee' => $data]);
     }
 
@@ -104,7 +108,7 @@ class EmployeeController extends Controller
 
     public function update($id)
     {
-        $this->employeeRepository->update($id);
+        $this->employeeRepositoryInterface->update($id);
         return redirect()->route('employee.show', ['id' => $id]);
     }
 
@@ -116,7 +120,7 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
-        $this->employeeRepository->delete($id);
+        $this->employeeRepositoryInterface->delete($id);
         return redirect()->route('employee.index');
     }
 }
