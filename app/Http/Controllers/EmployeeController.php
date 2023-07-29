@@ -23,7 +23,7 @@ class EmployeeController extends Controller
     // public function __construct(EmployeeMySqlRepository $employeeMySqlRepository)
     public function __construct(EmployeeRepositoryInterface $employeeRepositoryInterface)
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        // $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
